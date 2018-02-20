@@ -61,7 +61,7 @@ biocLite("limma")
 ````
 
 ## Files available: 
-1. main.py - contains a detailed walkthrough of differential gene analysis with Limma using the GEO series (GSE31102).
+1. main.r - contains a detailed walkthrough of differential gene analysis with Limma using the GEO series (GSE31102).
 
 
 ## Details: 
@@ -108,4 +108,4 @@ The results look like this: <br>
 ![7 results](https://user-images.githubusercontent.com/35882413/36443601-383ae074-1647-11e8-9e43-10a512b81a98.png)
 
 ## How to run? :
-- Run main.py file. This file is not automated so please change relevant fields accordingly for your GEO series.
+- Run main.r file. This file is not automated so please change relevant fields accordingly for your GEO series.
