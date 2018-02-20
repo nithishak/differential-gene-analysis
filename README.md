@@ -30,4 +30,4 @@ A volcano plot plots significance of a fold change (p value) against the logFC f
 3. volcano-plot
 
 ## How to run?
-Run the main.py files in differential-gene-analysis, followed by upreg-downreg-genes and lastly, volcano-plot.
+Run the main.r files in differential-gene-analysis, followed by upreg-downreg-genes and lastly, volcano-plot.
