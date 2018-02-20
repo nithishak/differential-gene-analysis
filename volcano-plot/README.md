@@ -19,9 +19,9 @@ To install:
 ```` install.packages('ggrepel') ````
 
 ## Files available: 
-1. config.py - contains input fields 
-2. functions.py - contains several helper functions
-3. main.py - contains main code which uses the helper functions 
+1. config.r- contains input fields 
+2. functions.r - contains several helper functions
+3. main.r - contains main code which uses the helper functions 
 
 ## Details: 
 - This file generates a volcano plot: each dot represents a gene, the y axis represents -log(P.Value) and the x axis represents logFC values. 
@@ -31,5 +31,5 @@ To install:
 ![a-control_volcano_plot](https://user-images.githubusercontent.com/35882413/36443921-2048f18a-1648-11e8-9ba0-1fbe06c01e61.png)
 
 ## How to run? :
-- Change required input fields in the config.py file and set relevant paths. 
-- Run main.py file. 
+- Change required input fields in the config.r file and set relevant paths. 
+- Run main.r file. 
