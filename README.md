@@ -17,13 +17,12 @@ were 3 biological replicates per condition.
 ## Project description
 - This project aims to illustrate, how differential gene analysis (dga) can be carried out, and the results analyzed through ggplot. It can
 be broken down into 3 main parts.
-1. DGA : To carry out the analysis using R packages such as limma/DESeq/edgeR. As the GSE series we have used contains microarray data, limma was chosen.
-2. Finding out the most upregulated and downregulated genes for a particular comparison: For instance, if the comparison group was defined to be
-treated alpha cells relative to untreated alpha cells, it is possible to carry out DGA, order the genes according to logFCs, and to extract
-the top 20 most up-regulated and top 20 most down-regulated genes into a list.
-3. Plotting a volcano plot: A volcano plot plots significance of a fold change (p value) against the logFC for a gene. This way, it is possible
-to visualize which genes have undergone significant changes upon treatment. For this volcano plot, genes that are deemed to be significantly differentially
-expressed (adjusted p value < 0.05) have been highlighed in red. Furthermore, the top 20 upregulated and top 20 downregulated genes have been labelled.
+1. DGA : <br>
+To carry out the analysis using R packages such as limma/DESeq/edgeR. As the GSE series we have used contains microarray data, limma was chosen.
+2. Finding out the most upregulated and downregulated genes for a particular comparison: <br>
+For instance, if the comparison group was defined to be treated alpha cells relative to untreated alpha cells, it is possible to carry out DGA, order the genes according to logFCs, and to extract the top 20 most up-regulated and top 20 most down-regulated genes into a list.
+3. Plotting a volcano plot: <br>
+A volcano plot plots significance of a fold change (p value) against the logFC for a gene. This way, it is possible to visualize which genes have undergone significant changes upon treatment. For this volcano plot, genes that are deemed to be significantly differentially expressed (adjusted p value < 0.05) have been highlighed in red. Furthermore, the top 20 upregulated and top 20 downregulated genes have been labelled.
 
 ## Folders available
 1. differential-gene-analysis
