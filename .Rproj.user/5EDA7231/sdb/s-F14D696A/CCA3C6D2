@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#Download necessary libraries\nlibrary(GEOquery)\nlibrary(affy)\nlibrary(mouse430a2.db)\nlibrary(limma)\n\n##Downloading raw data from GEO series\n#Extract phenodata and featuredata and relevant columns\ngse <- getGEO(\"GSE31102\", GSEMatrix = TRUE) #extracts info from series matrix file\nshow(gse) #produces a list\n#phenoData\nphenoData <- pData(gse[[1]])\nhead(phenoData)\ncolnames(phenoData)\npd <- phenoData[,c(1,6,9,10,11)]\nnames(pd) <- c('treatment_rep','biologicalUnit', 'organism', 'cellType', 'treatment')\npd<- AnnotatedDataFrame(pd)\n#featureData\nfeatureData <- fData(gse[[1]])\nfd <- featureData[,11, drop = FALSE] #new df with 11th column of featureData\nfd<- AnnotatedDataFrame(fd)\n\n#Extract raw data\nfilePaths <- getGEOSuppFiles('GSE31102') #downloads raw data, in this case the tar file, extract manually to cel.gz files\nfilePaths\ndata<- ReadAffy(celfile.path='./GSE31102/') #AffyBatch object created, normalized using RMA method\nsampleNames(data) <- sub('.CEL.gz', '', sampleNames(data)) #renaming sample names to reflect rownames in phenoData\n\n#Normalize raw data and create an ExpressionSet object\nes<- rma(data) #Normalization process is carried out (rma method), an ExpressionSet object created\nexprs(es) #to view assayCounts\n\nphenoData(es) <- pd #adding phenoData to ExpressionSet object, can be viewed using pData(es)\nfeatureData(es) <- fd #adding featureData to ExpressionSet object, can be viewed using fData(es)\n\n#subset es for only mouse alpha cells\nnew_es <- es[,es$cellType == 'cell line: aTC1']\n\n#design matrix\nf <- factor(new_es$treatment, levels = c('compound: DMSO', 'compound: GW8510'))\ndesign <- model.matrix(~0+f)\ncolnames(design) <- c('control', 'GW8510_cpd')\nfit<- lmFit(new_es,design)\n\n#contrast matrix and differential gene analysis\ncontrast.matrix <- makeContrasts( GW8510_cpd-control, control-GW8510_cpd, levels= design)\nfit2 <- contrasts.fit(fit,contrast.matrix)\nfit2 <- eBayes(fit2)\n\n#View results for the comparison- GW8510_cpd-control (coef=1 in contrast.matrix)\na_ctrl<- topTable(fit2, coef=1, adjust='BH', sort.by='logFC', resort.by = 'logFC', p.value=0.05, number= Inf) #Sort results by logFc values(biggest to smallest, adjusted p value cutoff os 0.05 and we want to view all genes)\na_ctrl_volcano_plot <- topTable(fit2, coef=1, adjust='BH', sort.by='logFC', resort.by = 'logFC', number= Inf) # we want all genes regardless of adjusted p values to plot volcano plot\n\n\n#write results to files\nwrite.csv(a_ctrl, file = 'A-control.csv')\nwrite.csv(a_ctrl_volcano_plot, file = 'A-control_volcano_plot.csv')\n",
+    "created" : 1518548657191.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "713034175",
+    "id" : "CCA3C6D2",
+    "lastKnownWriteTime" : 1518808235,
+    "last_content_update" : 1518808235034,
+    "path" : "C:/Users/knsuk/Desktop/Diabetes_DGE_Example/Rscript.R",
+    "project_path" : "Rscript.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

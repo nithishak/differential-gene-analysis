@@ -1,0 +1,8 @@
+/differential-gene-analysis/*.csv
+/differential-gene-analysis/GSE31102/
+.Rhistory
+*.Rproj
+/upreg-downreg-genes/*.csv
+/upreg-downreg-genes/config
+*.pdf
+/volcano-plot/config

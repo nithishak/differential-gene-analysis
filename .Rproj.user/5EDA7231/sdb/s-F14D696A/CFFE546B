@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "##Plot a bar plot of 10 most up-regulated and 10 most down-regulated genes\nupreg_downreg_gene <- function(file_name, save_file_name){\n  #Read results file\n  dge_results <- read.csv(file_name,sep =',', stringsAsFactors = FALSE, check.names = FALSE)\n  \n  #Remove NA values for gene names in column for gene symbols\n  dge_results <- dge_results[!is.na(dge_results$Gene.Symbol),]\n  \n  \n  #20 most up-regulated genes (treatment-ctrl LogFC is +ve)\n  target <- 20\n  target_reached<- FALSE\n  while(!target_reached){\n    upreg <- dge_results[1:target,]\n    if (length(unique(upreg$Gene.Symbol)) < 20){\n      target<- target + 1\n    }\n    else{\n      target_reached <- TRUE\n      upreg_n <- upreg[!duplicated(upreg$Gene.Symbol), c(\"Gene.Symbol\", \"logFC\")]\n      #print (upreg_n)\n      upreg_n$regulation <- \"upregulated genes\"\n      colnames(upreg_n) <- c(\"Genes\", \"LogFC\", \"Regulation\")\n    }\n  }\n\n  \n  #20 most down-regulated genes (treatment-ctrl LogFC is -ve)\n  rows <- nrow(dge_results)\n  target = 19\n  target_reached<- FALSE\n  while(!target_reached){\n    downreg <- dge_results[(rows-target):rows,]\n    #print (length(unique(downreg$Gene.Symbol)))\n    if (length(unique(downreg$Gene.Symbol)) < 20){\n      target<- target + 1\n    }\n    else{\n      target_reached <- TRUE\n      downreg_n <- downreg[!duplicated(downreg$Gene.Symbol), c(\"Gene.Symbol\", \"logFC\")]\n      #print (downreg_n)\n      downreg_n$regulation <- \"downregulated genes\"\n      colnames(downreg_n) <- c(\"Genes\", \"LogFC\", \"Regulation\")\n    }\n  }\n  \n  gene_list <- rbind(upreg_n,downreg_n)\n  #print (plot_genes)\n  write.csv(gene_list, file = save_file_name, row.names = FALSE)\n  \n}\n\n#Input\nfile <- \"A-control.csv\"\nsave_file_name <- \"upreg_downreg_geneList.csv\"\nupregDownregGeneList <- upreg_downreg_gene(file, save_file_name)\n",
+    "created" : 1518790750040.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1157853729",
+    "id" : "CFFE546B",
+    "lastKnownWriteTime" : 1518799834,
+    "last_content_update" : 1518799834943,
+    "path" : "C:/Users/knsuk/Desktop/Diabetes_DGE_Example/upreg_downreg_genes.R",
+    "project_path" : "upreg_downreg_genes.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#Plot bar_graph\nlibrary(ggplot2)\n\nfile_name <- 'upreg_downreg_geneList.csv'\nplot_genes <- read.csv(file_name, sep= ',', stringsAsFactors = FALSE, check.names = FALSE)\nsample_name <- 'GSE31102'\n\nbar_plot<- ggplot(data=plot_genes, aes(x=reorder(Genes,LogFC), y=LogFC, fill = factor(Regulation))) + #fill <- color by column Regulation\n  geom_bar(stat=\"identity\") + #the height of the bar will represent the value in a column of the data frame. This is done by using stat=\"identity\" instead of the default, stat=\"bin\".\n  guides(fill= guide_legend(title=\"Legend\", title.theme = element_text(size=10, angle=0))) + #Lengend title properties\n  labs (x= \"Gene Symbols\", y= \"logFC values\", title = (paste0(\"Upregulated and downregulated genes for \", sample_name))) +\n  theme_bw()+\n  theme(plot.title = element_text(hjust = 0.5)) +\n  theme(axis.text.x=element_text(angle=45,hjust=1, size= 12)) \n\nprint(bar_plot)\n#ggsave(\"./logFC_bar_plots/STING_d-WT.png\", width =12, height = 8, dpi = 84)\n\n",
+    "created" : 1518790787467.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2752881441",
+    "id" : "899538AA",
+    "lastKnownWriteTime" : 1518802538,
+    "last_content_update" : 1518802538945,
+    "path" : "C:/Users/knsuk/Desktop/Diabetes_DGE_Example/bar_plot_upreg_downreg_genes.R",
+    "project_path" : "bar_plot_upreg_downreg_genes.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

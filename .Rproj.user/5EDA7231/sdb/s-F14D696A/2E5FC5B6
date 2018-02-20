@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#Plot volcano_plot\n\n#Initialize code#\n\nvolcano_plot <- function(file_name){\n  #Read results file from ./Results\n  vp <- read.csv(file_name,sep =',', stringsAsFactors = FALSE, row.names = 1, check.names = FALSE)\n  \n  #This is to color code red for genes for which adj p value < 0.05 and grey for others.\n  #Create a new column called \"Significant\" which labels \"FDR<0.05\" is adj p value\n  #is less than 0.05, and \"Not Sig\" is not.\n  vp$Significant <- ifelse (vp$adj.P.Val<0.05, \"FDR<0.05\", \"Not Sig\")\n  \n  \n  #This is to label top 20 upregulated and top 20 downregulated genes in the volcano plot.\n  #Subset a new df that contains only sig genes based on adj p value.\n  vp_sig <- subset(vp, adj.P.Val < 0.05)\n  #Choose first 20 rows, based on logFC values, afinal contains sorted logFC values from largest to smallest logFC values.\n  upreg <- vp_sig[1:20,]\n  #Choose the last 20 rows, based on logFC values.\n  rows<- nrow(vp_sig)\n  target = 19\n  downreg <- vp_sig[(rows-target):rows,]\n  #Combine upreg and downreg genes into one df.\n  sig_genes <- rbind(upreg,downreg)\n  #dim(sig_genes)\n  \n  \n  #Plot volcano plot\n  volcanoPlot <- ggplot(vp, aes(logFC,-log10(P.Value), color= Significant)) +\n    geom_point() +\n    scale_color_manual(values = c(\"red\",\"grey\")) +\n    theme_bw (base_size = 16) +\n    geom_text_repel (data= sig_genes, aes(label= Gene.Symbol), size= 3, box.padding = 0.25, point.padding = 0.3, color = \"black\")\n  \n  print (volcanoPlot) \n  \n  #to check for NA values in a column of df: any(is.na(afinal$Significant)), ans is TRUE/FALSE.\n  # name = sub(\".csv\",\"\",file_name)\n  # f_name= paste(name,\".png\", sep = \"\")\n  # ggsave(f_name, width =12, height = 8, dpi = 84)\n  \n}\n\n\n---------------------------------------------------------------------------------------------------------------------------------\n#Main Code #Run this\n  \nlibrary(ggplot2)\nlibrary(ggrepel)\n\ndir <- readline(prompt= \"Enter the directory:\")\n#../../volcano_plot\nsetwd(dir)\nfile_list <- list.files(pattern=\".csv\")\nfile_list\nfor (file in file_list){\n  volcano_plot(file)\n}\n\n\n\n",
+    "created" : 1518790823032.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1676864190",
+    "id" : "2E5FC5B6",
+    "lastKnownWriteTime" : 1518806158,
+    "last_content_update" : 1518806158586,
+    "path" : "C:/Users/knsuk/Desktop/Diabetes_DGE_Example/volcano_plot.R",
+    "project_path" : "volcano_plot.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
