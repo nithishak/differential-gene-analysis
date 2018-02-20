@@ -28,6 +28,7 @@ To install:
 - Genes which are significantly differentially expressed are marked in red; they were chosen using a adj.P.Value (adjusted p value) threshold value of 0.05.
 - The top 20 up-regulated and top 20 down-regulated genes have been labeled using ggrepel.
 - The volcano plot looks like this: <br>
+![a-control_volcano_plot](https://user-images.githubusercontent.com/35882413/36443921-2048f18a-1648-11e8-9ba0-1fbe06c01e61.png)
 
 ## How to run? :
 - Change required input fields in the config.py file and set relevant paths. 
