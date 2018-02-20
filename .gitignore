@@ -1,5 +1,6 @@
 /differential-gene-analysis/*.csv
 /differential-gene-analysis/GSE31102/
+/differential-gene-analysis/config
 .Rhistory
 *.Rproj
 /upreg-downreg-genes/*.csv
