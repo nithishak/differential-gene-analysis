@@ -1,7 +1,7 @@
 # Project name
 Differential gene analysis for microarray data using limma and visualization of analysis though volcano plots
 
-## Note
+## Note:
 Please refer to individual directory READMEs for detailed information and instructions. Diagrams are included as well.
 
 ## Environment
